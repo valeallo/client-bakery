@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { FETCH_PASTRIES_API } from '../constants/Constants';
 import axios from 'axios';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from '../redux/reducers/cartSlice';
 
 const ProductPage = () => {
 
@@ -13,6 +15,7 @@ const ProductPage = () => {
     const [pastry, setPastry] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
       const fetchPastry = async () => {
@@ -79,7 +82,9 @@ const ProductPage = () => {
                       <div class="flex">
                         <span class="title-font font-medium text-2xl text-gray-900">{pastry.discountedPrice? pastry.discountedPrice : pastry.price}€</span>
                         <span className="text-lg text-slate-900 line-through">  {pastry.discountedPrice ? pastry.price + "€": " "}</span>
-                        <button class="flex ml-auto text-white  bg-[#e68d8d] border-0 py-2 px-6 focus:outline-none  hover:bg-[#dc6262] rounded">Acquista Ora</button>
+                        <button      onClick={() => {
+                dispatch(addToCart(pastry));
+              }} class="flex ml-auto text-white  bg-[#e68d8d] border-0 py-2 px-6 focus:outline-none  hover:bg-[#dc6262] rounded">Add to Cart</button>
                         <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                           <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" class="w-5 h-5" viewBox="0 0 24 24">
                             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>

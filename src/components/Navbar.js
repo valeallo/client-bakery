@@ -1,18 +1,52 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import styled, { keyframes } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import useSessionStorage from '../hooks/useSessionStorage';
 import { toggle } from "../redux/reducers/uiSlice";
 import { cartTotalSelector } from "../redux/selectors";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+
+const CartContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const TotalDisplay = styled.span`
+  font-size: 1rem;
+  color: #ff857e;
+  margin-right: 10px;
+  font-weight: bold;
+`;
+
+const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
+  color: #ff857e;
+`;
+
+
+
 
 const Navbar = () => {
     const { loggedInUser } = useSessionStorage();
     const navigate = useNavigate();
     const [scrolled, setScrolled] = useState(false);
+    const [change, setChange] = useState(false);
 
 
     const total = useSelector(cartTotalSelector);
     const dispatch = useDispatch();
+    useEffect(() => {
+        if (total !== 0) {
+          setChange(true);
+    
+          setTimeout(() => {
+            setChange(false);
+          }, 1000);
+        }
+      }, [total]);
+    
 
     useEffect(() => {
         const handleScroll = () => {
@@ -63,17 +97,25 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="mr-5">
-                    <div   onClick={() => {
-          dispatch(toggle());
-        }}>CartIcon</div>
+                            {total}
+                        <ShoppingCartIcon 
+                        className=' text-[#ff857e] mr-5'
+                        onClick={() => {
+                        dispatch(toggle());
+                        }}> 
+                 
+                        
+                        </ShoppingCartIcon>
+                     
+                        
                     {loggedInUser?
                                 <button
                                 onClick={clearStorage}
-                                className="transition ease-in-out delay-150 hover:-translate-y-1  text-pink  rounded-full text-pink-400"
+                                className="transition ease-in-out delay-150 hover:text-[#c06460]  text-pink  rounded-full text-[#ff857e]"
                                 >Logout</button>
                                 :
                                 <button
-                                className="transition ease-in-out delay-150 hover:-translate-y-1  text-pink  rounded-full text-pink-400"
+                                className="transition ease-in-out delay-150 hover:text-[#c06460]  text-pink  rounded-full text-[#ff857e]"
                                 onClick={navigateToLogin}
                             >
                                 Login
