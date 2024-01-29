@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { FETCH_PASTRIES_API } from '../constants/Constants';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 const ProductPage = () => {
 
@@ -41,7 +42,7 @@ const ProductPage = () => {
   return (
       <div>
           {pastry ? (
-              <section class="text-gray-700 body-font overflow-hidden bg-white">
+              <section class="text-gray-700 body-font overflow-hidden bg-white min-h-screen">
                 <div class="container px-5 py-24 mx-auto">
                   <div class="lg:w-4/5 mx-auto flex flex-wrap">
                     <img  class="lg:w-1/2 w-full h-30 object-cover object-center rounded border border-gray-200" src={pastry.imageUrl}  alt={pastry.name} />
@@ -92,6 +93,7 @@ const ProductPage = () => {
           ) : (
               <p>Pastry not found.</p>
           )}
+          <Footer></Footer>
       </div>
   );
 }
