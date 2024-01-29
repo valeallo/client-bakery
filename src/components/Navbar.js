@@ -96,17 +96,12 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mr-5">
-                            {total}
-                        <ShoppingCartIcon 
-                        className=' text-[#ff857e] mr-5'
-                        onClick={() => {
-                        dispatch(toggle());
-                        }}> 
-                 
-                        
-                        </ShoppingCartIcon>
-                     
+                    <div className="mr-5 flex flex-row">
+                    <CartContainer onClick={() => dispatch(toggle())} className='mr-5'>
+                    <TotalDisplay>{total}</TotalDisplay>
+                    <StyledShoppingCartIcon />
+                    </CartContainer>
+                                    
                         
                     {loggedInUser?
                                 <button
