@@ -1,10 +1,28 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSessionStorage from '../hooks/useSessionStorage';
 
 const Navbar = () => {
     const { loggedInUser } = useSessionStorage();
     const navigate = useNavigate();
+    const [active, setActive] = useState("");
+    const [toggle, setToggle] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            if (scrollTop > 100) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const clearStorage = () => {
         sessionStorage.clear()
@@ -18,8 +36,8 @@ const Navbar = () => {
       };
 
     return (
-        <>
-            <div className=" w-full sticky">
+        
+            <div className={scrolled? " w-full fixed top-0 z-20" : "w-full "}>
                 <div className="flex h-4 bg-[#efa9a9]">
                 </div>
                 <div className="flex items-center justify-between flex-wrap p-4 sticky bg-white">
@@ -56,7 +74,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </>
+        
     )
 }
 

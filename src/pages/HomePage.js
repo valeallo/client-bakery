@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import AllPastries from '../components/AllPastries'
+import Footer from '../components/Footer'
 
 
 
@@ -12,6 +13,7 @@ const HomePage = () => {
     <>
      <Hero />
      <AllPastries />
+     <Footer />
 
     </>
   )
