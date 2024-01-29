@@ -28,8 +28,8 @@ const ProductCard = ({product}) => {
                 </button>
                 <div className="mt-1 mb-2 flex items-center justify-between">
                 <p className="m-7"> 
-                    <span className="text-3xl font-bold text-slate-900">{product?.discountedPrice ? product?.discountedPrice : product.price}€</span>
-                    <span className="text-sm text-slate-900 line-through">{product?.discountedPrice ? product.price + "€" : " "}</span>
+                    <span className="text-3xl font-bold text-slate-900">{product.discountedPrice}€</span>
+                  {product.discountedPrice && <span className="text-sm text-slate-900 line-through">{product.price + "€"}</span> }
                 </p>
 
                 </div>
