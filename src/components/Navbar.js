@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import useSessionStorage from '../hooks/useSessionStorage';
+import { toggle } from "../redux/reducers/uiSlice";
+import { cartTotalSelector } from "../redux/selectors";
 
 const Navbar = () => {
     const { loggedInUser } = useSessionStorage();
     const navigate = useNavigate();
-    const [active, setActive] = useState("");
-    const [toggle, setToggle] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+
+
+    const total = useSelector(cartTotalSelector);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,6 +63,9 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="mr-5">
+                    <div   onClick={() => {
+          dispatch(toggle());
+        }}>CartIcon</div>
                     {loggedInUser?
                                 <button
                                 onClick={clearStorage}

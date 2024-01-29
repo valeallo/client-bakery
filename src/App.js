@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import PageNotFound from './pages/PageNotFound';
 import ProductPage from './pages/ProductPage';
 import Login from './pages/Login';
+import Cart from "./components/Cart"
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 </Route>
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
+            <Cart />
         </BrowserRouter>
     </div>
   );
