@@ -9,20 +9,26 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 const CartContainer = styled.div`
-  display: flex;
-  align-items: center;
+  position: relative;
   cursor: pointer;
+  margin-right: 4rem;
 `;
 
-const TotalDisplay = styled.span`
-  font-size: 1rem;
-  color: #ff857e;
-  margin-right: 10px;
+const ItemCount = styled.span`
+  position: absolute;
+  top: -10px;   
+  right: -20px;
+  background-color: #ff857e;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
   font-weight: bold;
 `;
 
 const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   color: #ff857e;
+  font-size: 6rem;  
 `;
 
 
@@ -97,8 +103,8 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="mr-5 flex flex-row">
-                    <CartContainer onClick={() => dispatch(toggle())} className='mr-5'>
-                    <TotalDisplay>{total}</TotalDisplay>
+                    <CartContainer onClick={() => dispatch(toggle())}>
+                    <ItemCount>{total}</ItemCount>
                     <StyledShoppingCartIcon />
                     </CartContainer>
                                     
